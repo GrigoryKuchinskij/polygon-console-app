@@ -10,9 +10,13 @@ namespace PolygonConsoleApp
     class Program
     {
         static void Main(string[] args)
-        {            
-            List<string[]> polygonPointsList  = ReadCSVFile(@"polygonPoints.csv");
-            List<string[]> segmentsList = ReadCSVFile(@"segments.csv");
+        {
+            List<string[]> polygonPointsList = new List<string[]>();
+            List<string[]> segmentsList = new List<string[]>();
+            try {
+                polygonPointsList = ReadCSVFile(@"polygonPoints.csv");
+                segmentsList = ReadCSVFile(@"segments.csv");
+            } catch { Console.WriteLine("Ошибка распознавания файлов polygonPoints.csv и segments.csv!"); Console.ReadKey(); Environment.Exit(0); }
             Point[] polyPoints = ConvertToPoint(polygonPointsList);
             Segment[] lines = ConvertToSegment(segmentsList);            
             Console.WriteLine(
